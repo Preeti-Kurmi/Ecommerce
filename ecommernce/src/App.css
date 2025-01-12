@@ -1,0 +1,17 @@
+/* Ensure the layout stretches and positions the footer */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+  flex: 1; /* Take remaining space, pushing footer down */
+}
+
+footer {
+  background-color: #003366;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
