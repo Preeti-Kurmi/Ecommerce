@@ -4,10 +4,11 @@ import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const AddProduct = () => {
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
   const token = localStorage.getItem('token');
 console.log("frontend",token)
-    const API_URL = "http://localhost:8000/api/products";
-    const IMAGE_URL = "http://localhost:8000/assets/Images/";
+    const API_URL = `${API_BASE_URL}/api/products`;
+    const IMAGE_URL = `${API_BASE_URL}/assets/Images/`;
     const [formData, setFormData] = useState({
         name: "",
         price: "",

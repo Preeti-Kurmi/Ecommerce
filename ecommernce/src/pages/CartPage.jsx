@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 function CartPage() {
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
   const carts = useSelector((state) => state.cart);
-  const API_URL = "http://localhost:8000/assets/Images/"
+  const API_URL = `${API_BASE_URL}/assets/Images/`
   const dispatch=useDispatch();
   const navigate=useNavigate()
   const [address,setAddress]=useState("main road")

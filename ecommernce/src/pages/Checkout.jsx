@@ -4,8 +4,9 @@ import { FaAngleDown,FaAngleUp } from 'react-icons/fa'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 function Checkout({setOrder}) {
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
   const cart=useSelector(state=>state.cart)
-   const API_URL = "http://localhost:8000/assets/Images/"
+   const API_URL = `${API_BASE_URL}/assets/Images/`
   const navigate=useNavigate();
     
 

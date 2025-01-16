@@ -5,12 +5,16 @@ import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import {FcGoogle} from 'react-icons/fc'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const dispatch = useDispatch();
-  const URL="http://localhost:8000/auth/google/callback"
+  const navigate=useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
+  console.log("url",API_BASE_URL)
+  const URL=`${API_BASE_URL}/auth/google/callback`
   const googleAuth=()=>{
     window.open(
       `${URL}`,
@@ -25,8 +29,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/login', formData);
+      const response = await axios.post(`${API_BASE_URL}/api/login`, formData);
       setMessage('Login successful!');
+      navigate('/')
 
       dispatch(
         login({

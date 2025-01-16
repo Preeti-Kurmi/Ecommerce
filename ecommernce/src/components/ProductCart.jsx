@@ -4,7 +4,9 @@ import {useDispatch} from 'react-redux';
 import {addToCart} from '../redux/cart'
 
 function ProductCart({product}) {
-   const API_URL = "http://localhost:8000/assets/Images/"
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
+  
+   const API_URL = `${API_BASE_URL}/assets/Images/`
   const dispatch=useDispatch();
   const handleAddToCart=(e,product)=>{
  e.preventDefault()

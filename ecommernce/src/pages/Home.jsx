@@ -13,11 +13,12 @@ import Footer from '../components/Footer'
 import axios from 'axios'
 
 function Home() {
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
     const dispatch=useDispatch();
     const products=useSelector(state=>state.product)
     console.log(products,"p")
     const fetchData=async()=>{
-      try{ const response=await axios.get('http://localhost:8000/api/products')
+      try{ const response=await axios.get(`${API_BASE_URL}/api/products`)
           if(response){
               console.log("data",response.data)
               dispatch(setProducts(response.data))

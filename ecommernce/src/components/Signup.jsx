@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "" });
   const [message, setMessage] = useState("");
+  const navigate=useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_APP_URL
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -14,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       console.log(formData,"form")
-      const response = await axios.post("http://localhost:8000/api/signup", formData);
+      const response = await axios.post(`${API_BASE_URL}/api/signup`, formData);
       setMessage(response.data.message);
       setFormData({
         name:"",
@@ -22,6 +24,8 @@ const Signup = () => {
         password:"",
         role:"",
       })
+      navigate("/login")
+
       console.log("data",response.data)
     } catch (error) {
       setMessage(error.response.data.error);
