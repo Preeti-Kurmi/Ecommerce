@@ -3,6 +3,7 @@ const { getProducts, addProduct,deleteProduct,updateProduct} = require("../contr
 const multer=require('multer')
 const path=require('path')
 
+
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, "assets/Images");
@@ -21,10 +22,10 @@ const multerStorage = multer.diskStorage({
   
 
 const router = express.Router();
-
+const auth=require('../middleware/authmiddleware')
 router.get("/", getProducts);
-router.post("/",upload.single("image"), addProduct);
-router.delete("/:id",deleteProduct);
-router.put("/:id",upload.single("image"), updateProduct);
+router.post("/",upload.single("image"),auth, addProduct);
+router.delete("/:id",auth,deleteProduct);
+router.put("/:id",upload.single("image"),auth, updateProduct);
 
 module.exports = router;

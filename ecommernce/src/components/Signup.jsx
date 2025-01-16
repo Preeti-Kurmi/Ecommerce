@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "" });
@@ -12,8 +13,15 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData,"form")
       const response = await axios.post("http://localhost:8000/api/signup", formData);
       setMessage(response.data.message);
+      setFormData({
+        name:"",
+        email:"",
+        password:"",
+        role:"",
+      })
       console.log("data",response.data)
     } catch (error) {
       setMessage(error.response.data.error);
@@ -64,6 +72,7 @@ const Signup = () => {
         </select>
         <button className="w-full bg-blue-500 text-white py-2 rounded">Sign Up</button>
       </form>
+      <p className="m-2 pl-1">Already have an account ?<Link to="/login" className="p-2">Login</Link></p>
       {message && <p className="text-center mt-4">{message}</p>}
     </div>
   );

@@ -1,7 +1,12 @@
 const jwt = require("jsonwebtoken");
 
-exports.verifyToken = (req, res, next) => {
-  const token = req.headers["authorization"];
+const verifyToken = (req, res, next) => {
+  console.log("header",req.headers)
+  const authHeader = req.headers["authorization"];
+
+const token = authHeader.split(" ")[1];
+ 
+  console.log(token,"token")
   if (!token) return res.status(403).json({ error: "Access denied" });
 
   try {
@@ -13,7 +18,4 @@ exports.verifyToken = (req, res, next) => {
   }
 };
 
-exports.verifyAdmin = (req, res, next) => {
-  if (req.user.role !== "Admin") return res.status(403).json({ error: "Access denied" });
-  next();
-};
+module.exports=verifyToken;
