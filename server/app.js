@@ -63,13 +63,14 @@ app.use(passport.session());
 
 // CORS setup
 const cors = require("cors");
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
+app.use(cors())
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//   })
+// );
 app.use(express.json());
 // Routes
 app.get(
@@ -80,8 +81,8 @@ app.get(
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:5173/",
-    failureRedirect: "http://localhost:5173/login",
+    successRedirect: `${process.env.CLIENT_URL}`,
+    failureRedirect: `${process.env.CLIENT_URL}/login`,
   })
 );
 
@@ -101,11 +102,7 @@ app.get("/auth/login/failed", (req, res) => {
   res.status(401).json({ error: true, message: "Login failed" });
 });
 
-// Logout Route
-app.get("/auth/logout", (req, res) => {
-  req.logout();
-  res.redirect("http://localhost:5173/login");
-});
+
 connectDB();
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/api", authRoutes);
