@@ -11,9 +11,10 @@ import Order from './pages/Order';
 import Filterdata from './pages/filerdata';
 import AddProduct from './components/AddProduct';
 import Login from './components/Login';
-import Signup from './components/SignUp';
+import Register from './components/Register';
 
-import { useEffect } from 'react';
+
+
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './redux/authSlice';
 function App() {
@@ -47,7 +48,7 @@ function App() {
          
           
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Register />} />
         </Routes>
         <Footer />
       </BrowserRouter>
